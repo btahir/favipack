@@ -1,24 +1,24 @@
-# Compressico
+# Favipack
 
-![Compressico banner](./assets/compressico-banner.jpg)
+![Favipack banner](./assets/favipack-banner.jpg)
 
-Compressico is a small Node/TypeScript package for two common website chores:
+Favipack is a small Node/TypeScript package for two common website chores:
 
 - compress PNG and JPEG images
 - generate `.ico` favicons from PNG or JPEG inputs
 
-It uses Sharp for decode, resize, and image compression. ICO writing is first-party code: Compressico writes the `ICONDIR`, directory entries, PNG-backed ICO entries, and optional BMP/DIB entries itself.
+It uses Sharp for decode, resize, and image compression. ICO writing is first-party code: Favipack writes the `ICONDIR`, directory entries, PNG-backed ICO entries, and optional BMP/DIB entries itself.
 
 ## Install
 
 ```sh
-npm install compressico
+npm install favipack
 ```
 
 ## API
 
 ```ts
-import { compressFile, compressImage, createFavicon, createIco } from "compressico";
+import { compressFile, compressImage, createFavicon, createIco } from "favipack";
 
 await compressFile("public/photo.jpg", "public/photo.min.jpg", {
   quality: 78,
@@ -45,19 +45,19 @@ const ico = await createIco("public/logo.jpg", {
 ## CLI
 
 ```sh
-compressico compress input.jpg output.jpg --quality 80 --max-width 1600
-compressico compress input.png output.png --png-palette
-compressico favicon logo.png favicon.ico --sizes 16,32,48,256
-compressico favicon logo.jpg favicon.ico --ico-format bmp
+favipack compress input.jpg output.jpg --quality 80 --max-width 1600
+favipack compress input.png output.png --png-palette
+favipack favicon logo.png favicon.ico --sizes 16,32,48,256
+favipack favicon logo.jpg favicon.ico --ico-format bmp
 ```
 
 ## Assets
 
-The package includes optimized artwork generated for Compressico:
+The package includes optimized artwork generated for Favipack:
 
-- `assets/compressico-banner.jpg`
-- `assets/compressico-logo.png`
-- `assets/compressico-icon-256.png`
+- `assets/favipack-banner.jpg`
+- `assets/favipack-logo.png`
+- `assets/favipack-icon-256.png`
 - `assets/favicon.ico`
 
 The larger generation sources live in `assets/source` locally and are not included in the npm package tarball.

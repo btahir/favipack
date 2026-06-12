@@ -1,10 +1,10 @@
 {
-  "name": "compressico",
-  "version": "0.1.0",
+  "name": "favipack",
+  "version": "0.1.1",
   "description": "Compress PNG/JPEG images and generate ICO favicons.",
   "type": "module",
   "bin": {
-    "compressico": "dist/cli.js"
+    "favipack": "dist/cli.js"
   },
   "exports": {
     ".": {
@@ -14,9 +14,9 @@
   },
   "files": [
     "dist",
-    "assets/compressico-banner.jpg",
-    "assets/compressico-icon-256.png",
-    "assets/compressico-logo.png",
+    "assets/favipack-banner.jpg",
+    "assets/favipack-icon-256.png",
+    "assets/favipack-logo.png",
     "assets/favicon.ico",
     "README.md",
     "LICENSE"
@@ -40,13 +40,13 @@
   ],
   "author": "Bilal Tahir",
   "license": "MIT",
-  "homepage": "https://github.com/btahir/compressico#readme",
+  "homepage": "https://github.com/btahir/favipack#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/btahir/compressico.git"
+    "url": "git+https://github.com/btahir/favipack.git"
   },
   "bugs": {
-    "url": "https://github.com/btahir/compressico/issues"
+    "url": "https://github.com/btahir/favipack/issues"
   },
   "engines": {
     "node": "^18.17.0 || ^20.3.0 || >=21.0.0"

@@ -199,15 +199,15 @@ function optionalSizes(parsed: ParsedArgs, name: string): number[] | undefined {
 }
 
 function printHelp(): void {
-  console.log(`Compressico
+  console.log(`Favipack
 
 Usage:
-  compressico compress <input> <output> [--quality 82] [--format jpeg|png] [--max-width 1200] [--max-height 1200]
-  compressico favicon <input> <output.ico> [--sizes 16,32,48,256] [--ico-format auto|png|bmp] [--fit contain|cover|fill]
+  favipack compress <input> <output> [--quality 82] [--format jpeg|png] [--max-width 1200] [--max-height 1200]
+  favipack favicon <input> <output.ico> [--sizes 16,32,48,256] [--ico-format auto|png|bmp] [--fit contain|cover|fill]
 
 Commands:
   compress   Compress a PNG/JPEG with Sharp.
-  favicon    Create an ICO favicon with Compressico's own ICO encoder.
+  favicon    Create an ICO favicon with Favipack's own ICO encoder.
 `);
 }
 
