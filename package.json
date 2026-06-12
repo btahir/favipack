@@ -1,0 +1,52 @@
+{
+  "name": "compressico",
+  "version": "0.1.0",
+  "description": "Compress PNG/JPEG images and generate ICO favicons.",
+  "type": "module",
+  "bin": {
+    "compressico": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets/compressico-banner.jpg",
+    "assets/compressico-icon-256.png",
+    "assets/compressico-logo.png",
+    "assets/favicon.ico",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run clean && npm test"
+  },
+  "keywords": [
+    "compress",
+    "favicon",
+    "ico",
+    "image",
+    "jpeg",
+    "jpg",
+    "png",
+    "sharp"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
+  }
+}
