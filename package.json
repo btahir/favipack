@@ -4,7 +4,7 @@
   "description": "Compress PNG/JPEG images and generate ICO favicons.",
   "type": "module",
   "bin": {
-    "compressico": "./dist/cli.js"
+    "compressico": "dist/cli.js"
   },
   "exports": {
     ".": {
@@ -38,7 +38,16 @@
     "png",
     "sharp"
   ],
+  "author": "Bilal Tahir",
   "license": "MIT",
+  "homepage": "https://github.com/btahir/compressico#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btahir/compressico.git"
+  },
+  "bugs": {
+    "url": "https://github.com/btahir/compressico/issues"
+  },
   "engines": {
     "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
   },
