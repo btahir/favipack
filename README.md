@@ -2,10 +2,11 @@
 
 ![Favipack banner](./assets/favipack-banner.jpg)
 
-Favipack is a small Node/TypeScript package for two common website chores:
+Favipack is a small Node/TypeScript package for common website image chores:
 
-- compress PNG and JPEG images
+- compress and convert PNG, JPEG, WebP, and AVIF images
 - generate `.ico` favicons from PNG or JPEG inputs
+- generate full website favicon packs with PNG icons and `site.webmanifest`
 
 It uses Sharp for decode, resize, and image compression. ICO writing is first-party code: Favipack writes the `ICONDIR`, directory entries, PNG-backed ICO entries, and optional BMP/DIB entries itself.
 
@@ -18,7 +19,7 @@ npm install favipack
 ## API
 
 ```ts
-import { compressFile, compressImage, createFavicon, createIco } from "favipack";
+import { compressFile, compressImage, createFavicon, createFaviconPack, createIco } from "favipack";
 
 await compressFile("public/photo.jpg", "public/photo.min.jpg", {
   quality: 78,
@@ -36,6 +37,12 @@ await createFavicon("public/logo.png", "public/favicon.ico", {
   fit: "contain"
 });
 
+await createFaviconPack("public/logo.png", "public", {
+  appName: "My Site",
+  shortName: "Site",
+  themeColor: "#ffffff"
+});
+
 const ico = await createIco("public/logo.jpg", {
   sizes: [16, 32, 48],
   format: "bmp"
@@ -47,9 +54,36 @@ const ico = await createIco("public/logo.jpg", {
 ```sh
 favipack compress input.jpg output.jpg --quality 80 --max-width 1600
 favipack compress input.png output.png --png-palette
+favipack compress hero.jpg hero.webp --format webp --quality 80
+favipack compress hero.jpg hero.avif --format avif --quality 55
+favipack compress "public/**/*.{jpg,png}" --out-dir public/optimized --format webp --quality 80
 favipack favicon logo.png favicon.ico --sizes 16,32,48,256
 favipack favicon logo.jpg favicon.ico --ico-format bmp
+favipack pack logo.png public --app-name "My Site" --theme-color "#ffffff"
+favipack --version
 ```
+
+Compression commands print size stats:
+
+```text
+photo.jpg -> photo.min.jpg (1.8 MB -> 412.0 KB, 77.6% saved)
+```
+
+## Favicon Packs
+
+`favipack pack` writes a complete website favicon bundle:
+
+```text
+favicon.ico
+favicon-16x16.png
+favicon-32x32.png
+apple-touch-icon.png
+android-chrome-192x192.png
+android-chrome-512x512.png
+site.webmanifest
+```
+
+Manifest fields can be customized with `--app-name`, `--short-name`, `--theme-color`, `--background-color`, `--display`, and `--path-prefix`.
 
 ## Assets
 

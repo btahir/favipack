@@ -41,6 +41,22 @@ export interface PngOptions {
   progressive?: boolean;
 }
 
+export interface WebpOptions {
+  quality?: number;
+  alphaQuality?: number;
+  lossless?: boolean;
+  nearLossless?: boolean;
+  smartSubsample?: boolean;
+  effort?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+}
+
+export interface AvifOptions {
+  quality?: number;
+  lossless?: boolean;
+  effort?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+  chromaSubsampling?: "4:4:4" | "4:2:0";
+}
+
 export interface CompressOptions {
   format?: RequestedFormat;
   quality?: number;
@@ -49,6 +65,8 @@ export interface CompressOptions {
   keepMetadata?: boolean;
   jpeg?: JpegOptions;
   png?: PngOptions;
+  webp?: WebpOptions;
+  avif?: AvifOptions;
 }
 
 export interface CompressFileOptions extends CompressOptions {
@@ -110,12 +128,12 @@ function resolveOutputFormat(format: RequestedFormat | undefined, metadataFormat
     return requested;
   }
 
-  if (metadataFormat === "jpeg" || metadataFormat === "png") {
+  if (metadataFormat === "jpeg" || metadataFormat === "png" || metadataFormat === "webp" || metadataFormat === "avif") {
     return metadataFormat;
   }
 
   throw new TypeError(
-    `Only PNG and JPEG output are supported. Pass format explicitly for unsupported input format: ${metadataFormat ?? "unknown"}.`
+    `Only PNG, JPEG, WebP, and AVIF output are supported. Pass format explicitly for unsupported input format: ${metadataFormat ?? "unknown"}.`
   );
 }
 
@@ -136,17 +154,43 @@ function encodeCompressed(image: Sharp, format: SupportedFormat, options: Compre
       .toBuffer();
   }
 
-  const png = options.png ?? {};
+  if (format === "png") {
+    const png = options.png ?? {};
+    return image
+      .png({
+        compressionLevel: png.compressionLevel ?? 9,
+        adaptiveFiltering: png.adaptiveFiltering ?? true,
+        palette: png.palette ?? false,
+        quality: png.quality ?? options.quality,
+        colors: png.colors,
+        effort: png.effort ?? 10,
+        dither: png.dither,
+        progressive: png.progressive
+      })
+      .toBuffer();
+  }
+
+  if (format === "webp") {
+    const webp = options.webp ?? {};
+    return image
+      .webp({
+        quality: webp.quality ?? options.quality ?? 80,
+        alphaQuality: webp.alphaQuality,
+        lossless: webp.lossless,
+        nearLossless: webp.nearLossless,
+        smartSubsample: webp.smartSubsample ?? true,
+        effort: webp.effort ?? 4
+      })
+      .toBuffer();
+  }
+
+  const avif = options.avif ?? {};
   return image
-    .png({
-      compressionLevel: png.compressionLevel ?? 9,
-      adaptiveFiltering: png.adaptiveFiltering ?? true,
-      palette: png.palette ?? false,
-      quality: png.quality ?? options.quality,
-      colors: png.colors,
-      effort: png.effort ?? 10,
-      dither: png.dither,
-      progressive: png.progressive
+    .avif({
+      quality: avif.quality ?? options.quality ?? 55,
+      lossless: avif.lossless,
+      effort: avif.effort ?? 4,
+      chromaSubsampling: avif.chromaSubsampling ?? "4:2:0"
     })
     .toBuffer();
 }

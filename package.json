@@ -1,7 +1,7 @@
 {
   "name": "favipack",
-  "version": "0.1.2",
-  "description": "Compress PNG/JPEG images and generate ICO favicons.",
+  "version": "0.2.0",
+  "description": "Compress web images and generate favicon packs.",
   "type": "module",
   "bin": {
     "favipack": "dist/cli.js"
@@ -36,6 +36,9 @@
     "jpeg",
     "jpg",
     "png",
+    "webp",
+    "avif",
+    "manifest",
     "sharp"
   ],
   "author": "Bilal Tahir",

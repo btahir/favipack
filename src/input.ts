@@ -28,7 +28,7 @@ export async function writeOutputFile(path: string, data: Buffer): Promise<void>
   await writeFile(path, data);
 }
 
-export type SupportedFormat = "jpeg" | "png";
+export type SupportedFormat = "jpeg" | "png" | "webp" | "avif";
 export type RequestedFormat = SupportedFormat | "jpg" | "auto";
 
 export function normalizeRequestedFormat(format: RequestedFormat | undefined): SupportedFormat | "auto" {
@@ -44,6 +44,14 @@ export function normalizeRequestedFormat(format: RequestedFormat | undefined): S
     return "png";
   }
 
+  if (format === "webp") {
+    return "webp";
+  }
+
+  if (format === "avif") {
+    return "avif";
+  }
+
   throw new TypeError(`Unsupported image format: ${String(format)}`);
 }
 
@@ -56,6 +64,14 @@ export function formatFromPath(path: string): SupportedFormat | undefined {
 
   if (ext === ".png") {
     return "png";
+  }
+
+  if (ext === ".webp") {
+    return "webp";
+  }
+
+  if (ext === ".avif") {
+    return "avif";
   }
 
   return undefined;
