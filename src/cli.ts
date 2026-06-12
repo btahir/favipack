@@ -9,9 +9,16 @@ interface ParsedArgs {
 }
 
 async function main(): Promise<void> {
-  const parsed = parseArgs(process.argv.slice(2));
+  const args = process.argv.slice(2);
 
-  if (!parsed.command || parsed.flags.has("help") || parsed.flags.has("h")) {
+  if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
+    printHelp();
+    return;
+  }
+
+  const parsed = parseArgs(args);
+
+  if (!parsed.command) {
     printHelp();
     return;
   }

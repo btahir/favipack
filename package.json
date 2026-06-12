@@ -1,6 +1,6 @@
 {
   "name": "favipack",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Compress PNG/JPEG images and generate ICO favicons.",
   "type": "module",
   "bin": {
